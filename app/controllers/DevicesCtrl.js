@@ -1,14 +1,16 @@
 'use strict';
 
-angular.module('app.devices', ['ngRoute'])
+function DevicesCtrl($$getDevices) {
+    var vm = this;
+    vm.devices = $$getDevices.data;
+}
 
-.config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/devices', {
-        templateUrl: 'views/devices.html',
-        controller: 'DevicesCtrl'
-    });
-}])
+DevicesCtrl.resolve = {
+    '$$getDevices': function (GreenhouseService) {
+        return GreenhouseService.getDevices();
+    }
+};
 
-.controller('DevicesCtrl', [function () {
-
-}]);
+angular
+    .module('app')
+    .controller('DevicesCtrl', DevicesCtrl);

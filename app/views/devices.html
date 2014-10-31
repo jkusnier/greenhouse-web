@@ -1,1 +1,7 @@
 <p>Devices</p>
+
+<ul>
+    <li ng-repeat="device in vm.devices">
+        <a href="#/device/{{ device.coreid }}">{{device.name}} - {{device.description}}</a>
+    </li>
+</ul>

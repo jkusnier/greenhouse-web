@@ -1,6 +1,6 @@
 'use strict';
 
-function DeviceCtrl($route, $interval, GreenhouseService, $$getEnvironment) {
+function DeviceCtrl($scope, $route, $interval, GreenhouseService, $$getEnvironment) {
     var vm = this;
     vm.environment = $$getEnvironment.data;
 
@@ -15,9 +15,11 @@ function DeviceCtrl($route, $interval, GreenhouseService, $$getEnvironment) {
             });
     }
 
-    $interval(function(){
+    var intervalPromise = $interval(function(){
         this.refreshData($route.current.params.id);
     }.bind(this), 15000);
+
+    $scope.$on('$destroy', function () { $interval.cancel(intervalPromise); });
 }
 
 DeviceCtrl.resolve = {

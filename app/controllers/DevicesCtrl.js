@@ -1,8 +1,9 @@
 'use strict';
 
-function DevicesCtrl($$getDevices) {
+function DevicesCtrl($rootScope, $$getDevices) {
     var vm = this;
     vm.devices = $$getDevices.data;
+    $rootScope.breadCrumbs = ["devices"];
 }
 
 DevicesCtrl.resolve = {

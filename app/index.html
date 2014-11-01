@@ -22,7 +22,7 @@
 </head>
 <body>
 <ol class="breadcrumb">
-    <li><a href="#/devices">devices</a></li>
+    <li ng-repeat="item in breadCrumbs" ng-class="{'active': $last}"><a href="#/{{item}}">{{item}}</a></li>
 </ol>
 
 <!--[if lt IE 7]>

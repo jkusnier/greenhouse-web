@@ -1,10 +1,12 @@
 'use strict';
 
-function DeviceCtrl($scope, $route, $interval, GreenhouseService, $$getEnvironment) {
+function DeviceCtrl($rootScope, $scope, $route, $interval, GreenhouseService, $$getEnvironment) {
     var vm = this;
     vm.environment = $$getEnvironment.data;
+    $rootScope.breadCrumbs = ["devices","device"];
 
     vm.refreshData = refreshData;
+    console.log($route);
 
     function refreshData(id) {
         GreenhouseService.getEnvironment(id)

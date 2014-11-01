@@ -1,6 +1,6 @@
 'use strict';
 
-function DeviceCtrl($route, GreenhouseService, $$getEnvironment) {
+function DeviceCtrl($route, $interval, GreenhouseService, $$getEnvironment) {
     var vm = this;
     vm.environment = $$getEnvironment.data;
 
@@ -14,6 +14,10 @@ function DeviceCtrl($route, GreenhouseService, $$getEnvironment) {
                 console.error(err);
             });
     }
+
+    $interval(function(){
+        this.refreshData($route.current.params.id);
+    }.bind(this), 15000);
 }
 
 DeviceCtrl.resolve = {

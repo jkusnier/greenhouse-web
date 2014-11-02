@@ -30,6 +30,8 @@ function DeviceCtrl($rootScope, $scope, $route, $interval, GreenhouseService, $$
                 data: vm.temperatureData,
                 type: 'areaspline',
                 threshold: null,
+                marker: { enabled: false },
+                lineWidth: 0.1,
                 tooltip: {
                     valueDecimals: 2
                 },

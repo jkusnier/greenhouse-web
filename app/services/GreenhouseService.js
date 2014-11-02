@@ -12,6 +12,13 @@ function GreenhouseService($http) {
             url: 'http://api.weecode.com/greenhouse/v1/devices/'+id+'/environment'
         });
     };
+
+    this.getTempData = function (id) {
+        return $http({
+            method: 'GET',
+            url: 'http://api.weecode.com/greenhouse/v1/devices/'+id+'/last_day'
+        });
+    }
 }
 
 angular

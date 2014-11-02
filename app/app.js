@@ -4,6 +4,7 @@
 angular
     .module('app', [
         'ngRoute',
+        'highcharts-ng',
         'app.version'
     ])
     .config(['$routeProvider', function ($routeProvider) {

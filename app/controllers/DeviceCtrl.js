@@ -3,10 +3,52 @@
 function DeviceCtrl($rootScope, $scope, $route, $interval, GreenhouseService, $$getEnvironment) {
     var vm = this;
     vm.environment = $$getEnvironment.data;
+    vm.temperatureData = [];
     $rootScope.breadCrumbs = ["devices","device"];
 
     vm.refreshData = refreshData;
     console.log($route);
+
+    function setChartConfig() {
+        $scope.chartConfig = {
+            rangeSelector: {
+                selected: 1
+            },
+            title: {
+                text: 'History'
+            },
+            xAxis: {
+                type: 'datetime'
+            },
+            yAxis: {
+                title: {
+                    text: 'Temperature (F°)'
+                }
+            },
+            series: [{
+                name: 'Inside Temperature',
+                data: vm.temperatureData,
+                type: 'areaspline',
+                threshold: null,
+                tooltip: {
+                    valueDecimals: 2
+                },
+                fillColor: {
+                    linearGradient: {
+                        x1: 0,
+                        y1: 0,
+                        x2: 0,
+                        y2: 1
+                    },
+                    stops: [
+                        [0, Highcharts.getOptions().colors[0]],
+                        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                    ]
+                }
+            }]
+        }
+    }
+    setChartConfig();
 
     function refreshData(id) {
         GreenhouseService.getEnvironment(id)
@@ -22,6 +64,20 @@ function DeviceCtrl($rootScope, $scope, $route, $interval, GreenhouseService, $$
     }.bind(this), 15000);
 
     $scope.$on('$destroy', function () { $interval.cancel(intervalPromise); });
+
+    // Collect our grid data
+    (function () {
+        GreenhouseService.getTempData($route.current.params.id).then(function (res) {
+            var data = [];
+            for (var rec in res.data) {
+                //data.push([new Date(res.data[rec].byMinute).getTime() / 1000, res.data[rec].fahrenheit]);
+                data.push([new Date(res.data[rec].byMinute), res.data[rec].fahrenheit]);
+            }
+            vm.temperatureData = data;
+            console.log(vm.temperatureData);
+            setChartConfig();
+        });
+    })();
 }
 
 DeviceCtrl.resolve = {

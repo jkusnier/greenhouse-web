@@ -16,7 +16,7 @@ function GreenhouseService($http) {
     this.getTempData = function (id) {
         return $http({
             method: 'GET',
-            url: 'http://api.weecode.com/greenhouse/v1/devices/'+id+'/last_day'
+            url: 'http://api.weecode.com/greenhouse/v1/devices/'+id+'/data/fahrenheit'
         });
     }
 }

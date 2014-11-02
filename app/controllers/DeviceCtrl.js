@@ -70,8 +70,7 @@ function DeviceCtrl($rootScope, $scope, $route, $interval, GreenhouseService, $$
         GreenhouseService.getTempData($route.current.params.id).then(function (res) {
             var data = [];
             for (var rec in res.data) {
-                //data.push([new Date(res.data[rec].byMinute).getTime() / 1000, res.data[rec].fahrenheit]);
-                data.push([new Date(res.data[rec].byMinute), res.data[rec].fahrenheit]);
+                data.push([res.data[rec].time, res.data[rec].fahrenheit]);
             }
             vm.temperatureData = data;
             console.log(vm.temperatureData);

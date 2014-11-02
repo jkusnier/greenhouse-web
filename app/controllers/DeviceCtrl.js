@@ -67,14 +67,16 @@ function DeviceCtrl($rootScope, $scope, $route, $interval, GreenhouseService, $$
 
     // Collect our grid data
     (function () {
-        GreenhouseService.getTempData($route.current.params.id).then(function (res) {
-            var data = [];
+        GreenhouseService.getTempHist($route.current.params.id).then(function (res) {
             for (var rec in res.data) {
-                data.push([res.data[rec].time, res.data[rec].fahrenheit]);
+                vm.temperatureData.push([Date.parse(res.data[rec].time), res.data[rec].fahrenheit]);
             }
-            vm.temperatureData = data;
-            console.log(vm.temperatureData);
-            setChartConfig();
+            GreenhouseService.getTempData($route.current.params.id).then(function (res) {
+                for (var rec in res.data) {
+                    vm.temperatureData.push([Date.parse(res.data[rec].time), res.data[rec].fahrenheit]);
+                }
+                setChartConfig();
+            });
         });
     })();
 }

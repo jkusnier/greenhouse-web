@@ -4,53 +4,49 @@ function DeviceCtrl($rootScope, $scope, $route, $interval, GreenhouseService, $$
     var vm = this;
     vm.environment = $$getEnvironment.data;
     vm.temperatureData = [];
-    $rootScope.breadCrumbs = ["devices","device"];
+    $rootScope.breadCrumbs = ["devices", "device"];
 
     vm.refreshData = refreshData;
     console.log($route);
 
-    function setChartConfig() {
-        $scope.chartConfig = {
-            rangeSelector: {
-                selected: 1
-            },
-            title: {
-                text: 'History'
-            },
-            xAxis: {
-                type: 'datetime'
-            },
-            yAxis: {
-                title: {
-                    text: 'Temperature (F°)'
-                }
-            },
-            series: [{
-                name: 'Inside Temperature',
-                data: vm.temperatureData,
+    $scope.chartConfig = {
+        rangeSelector: {
+            selected: 1
+        },
+        options: {
+            chart: {
                 type: 'areaspline',
                 threshold: null,
-                marker: { enabled: false },
-                lineWidth: 0.1,
-                tooltip: {
-                    valueDecimals: 2
+                zoomType: 'x'
+            }
+        },
+        series: [{
+            name: 'Inside Temperature',
+            data: undefined,
+            lineWidth: 0.1,
+            tooltip: {
+                valueDecimals: 2
+            },
+            fillColor: {
+                linearGradient: {
+                    x1: 0,
+                    y1: 0,
+                    x2: 0,
+                    y2: 1
                 },
-                fillColor: {
-                    linearGradient: {
-                        x1: 0,
-                        y1: 0,
-                        x2: 0,
-                        y2: 1
-                    },
-                    stops: [
-                        [0, Highcharts.getOptions().colors[0]],
-                        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-                    ]
-                }
-            }]
-        }
-    }
-    setChartConfig();
+                stops: [
+                    [0, Highcharts.getOptions().colors[0]],
+                    [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                ]
+            }
+        }],
+        title: {
+            text: 'History'
+        },
+        xAxis: {type: 'datetime'},
+        yAxis: {title: {text: 'Temperature (F°)'}},
+        loading: false
+    };
 
     function refreshData(id) {
         GreenhouseService.getEnvironment(id)
@@ -61,24 +57,40 @@ function DeviceCtrl($rootScope, $scope, $route, $interval, GreenhouseService, $$
             });
     }
 
-    var intervalPromise = $interval(function(){
+    var intervalPromise = $interval(function () {
         this.refreshData($route.current.params.id);
     }.bind(this), 15000);
 
-    $scope.$on('$destroy', function () { $interval.cancel(intervalPromise); });
+    $scope.$on('$destroy', function () {
+        $interval.cancel(intervalPromise);
+    });
 
     // Collect our grid data
     (function () {
         GreenhouseService.getTempHist($route.current.params.id).then(function (res) {
+            var data = [];
             for (var rec in res.data) {
-                vm.temperatureData.push([Date.parse(res.data[rec].time), res.data[rec].fahrenheit]);
+                data.push([Date.parse(res.data[rec].time), res.data[rec].fahrenheit]);
             }
-            GreenhouseService.getTempData($route.current.params.id).then(function (res) {
-                for (var rec in res.data) {
-                    vm.temperatureData.push([Date.parse(res.data[rec].time), res.data[rec].fahrenheit]);
+            $scope.chartConfig.series[0].data = data;
+        }, function() {
+            // If it fails, just init an empty array to indicate to the next method that we are done
+            $scope.chartConfig.series[0].data = [];
+        });
+        GreenhouseService.getTempData($route.current.params.id).then(function (res) {
+            var data = [];
+            for (var rec in res.data) {
+                data.push([Date.parse(res.data[rec].time), res.data[rec].fahrenheit]);
+            }
+
+            // Wait for the other collection to finish or fail
+            var sleeper = function() {
+                if ($scope.chartConfig.series[0].data == undefined) {
+                    setTimeout(sleeper, 200);
                 }
-                setChartConfig();
-            });
+            };
+            var oldData = $scope.chartConfig.series[0].data;
+            $scope.chartConfig.series[0].data = oldData.concat(data);
         });
     })();
 }

@@ -4,6 +4,7 @@ function DeviceCtrl($rootScope, $scope, $route, $interval, GreenhouseService, $$
     var vm = this;
     vm.environment = $$getEnvironment.data;
     vm.temperatureData = [];
+    vm.hideDetails = true;
     $rootScope.breadCrumbs = ["devices", "device"];
 
     vm.refreshData = refreshData;

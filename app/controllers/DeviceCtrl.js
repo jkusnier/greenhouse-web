@@ -77,9 +77,6 @@ function DeviceCtrl($rootScope, $scope, $route, $interval, GreenhouseService, $$
             }
             var oldData = $scope.chartConfig.series[0].data;
             $scope.chartConfig.series[0].data = data.concat(oldData);
-        }, function() {
-            // If it fails, just init an empty array to indicate to the next method that we are done
-            $scope.chartConfig.series[0].data = [];
         });
         GreenhouseService.getTempData($route.current.params.id).then(function (res) {
             var data = [];

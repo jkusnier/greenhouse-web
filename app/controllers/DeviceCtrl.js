@@ -68,12 +68,18 @@ function DeviceCtrl($rootScope, $scope, $route, $interval, GreenhouseService, $$
         $interval.cancel(intervalPromise);
     });
 
+    function getLocalTimeFromGMT(sTime){
+        var dte = new Date(Date.parse(sTime));
+        dte.setTime(dte.getTime() - dte.getTimezoneOffset()*60*1000);
+        return Date.parse(dte);
+    }
+
     // Collect our grid data
     (function () {
         GreenhouseService.getTempHist($route.current.params.id).then(function (res) {
             var data = [];
             for (var rec in res.data) {
-                data.push([Date.parse(res.data[rec].time), res.data[rec].fahrenheit]);
+                data.push([getLocalTimeFromGMT(res.data[rec].time), res.data[rec].fahrenheit]);
             }
             var oldData = $scope.chartConfig.series[0].data;
             $scope.chartConfig.series[0].data = data.concat(oldData);
@@ -81,7 +87,7 @@ function DeviceCtrl($rootScope, $scope, $route, $interval, GreenhouseService, $$
         GreenhouseService.getTempData($route.current.params.id).then(function (res) {
             var data = [];
             for (var rec in res.data) {
-                data.push([Date.parse(res.data[rec].time), res.data[rec].fahrenheit]);
+                data.push([getLocalTimeFromGMT(res.data[rec].time), res.data[rec].fahrenheit]);
             }
             var oldData = $scope.chartConfig.series[0].data;
             $scope.chartConfig.series[0].data = oldData.concat(data);

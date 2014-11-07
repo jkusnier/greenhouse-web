@@ -25,7 +25,7 @@ function DeviceCtrl($rootScope, $scope, $route, $interval, GreenhouseService, $$
         },
         series: [{
             name: 'Inside Temperature',
-            data: undefined,
+            data: [],
             lineWidth: 0.1,
             tooltip: {
                 valueDecimals: 2
@@ -75,7 +75,8 @@ function DeviceCtrl($rootScope, $scope, $route, $interval, GreenhouseService, $$
             for (var rec in res.data) {
                 data.push([Date.parse(res.data[rec].time), res.data[rec].fahrenheit]);
             }
-            $scope.chartConfig.series[0].data = data;
+            var oldData = $scope.chartConfig.series[0].data;
+            $scope.chartConfig.series[0].data = data.concat(oldData);
         }, function() {
             // If it fails, just init an empty array to indicate to the next method that we are done
             $scope.chartConfig.series[0].data = [];
@@ -85,13 +86,6 @@ function DeviceCtrl($rootScope, $scope, $route, $interval, GreenhouseService, $$
             for (var rec in res.data) {
                 data.push([Date.parse(res.data[rec].time), res.data[rec].fahrenheit]);
             }
-
-            // Wait for the other collection to finish or fail
-            var sleeper = function() {
-                if ($scope.chartConfig.series[0].data == undefined) {
-                    setTimeout(sleeper, 200);
-                }
-            };
             var oldData = $scope.chartConfig.series[0].data;
             $scope.chartConfig.series[0].data = oldData.concat(data);
         });

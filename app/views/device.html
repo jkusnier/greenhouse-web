@@ -25,7 +25,7 @@
     </div>
 
     <div class="col-md-4 text-right">
-        <small ng-bind="vm.environment.published_at"></small>
+        <small ng-bind="vm.environment.published_at | date: 'short'"></small>
     </div>
 </div>
 

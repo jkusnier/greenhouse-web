@@ -19,8 +19,8 @@
 <div class="row">
     <div class="col-md-8">
         <ul class="list-inline" role="tablist">
-            <li role="presentation">Temperature <span class="badge" ng-bind="vm.environment.fahrenheit"></span></li>
-            <li role="presentation">Humidity <span class="badge" ng-bind="vm.environment.humidity"></span></li>
+            <li role="presentation">Temperature <span class="label" ng-class="{'label-success': !vm.temperatureWarning, 'label-danger': vm.temperatureWarning}" ng-bind="vm.environment.fahrenheit"></span></li>
+            <li role="presentation">Humidity <span class="label label-default" ng-bind="vm.environment.humidity"></span></li>
         </ul>
     </div>
 

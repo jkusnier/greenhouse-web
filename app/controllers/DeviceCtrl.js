@@ -7,6 +7,8 @@ function DeviceCtrl($rootScope, $scope, $route, $interval, GreenhouseService, $$
     vm.hideDetails = true;
     $rootScope.breadCrumbs = ["devices", "device"];
 
+    vm.temperatureWarning = (vm.environment.fahrenheit <= 34 || vm.environment.fahrenheit >= 85);
+
     vm.refreshData = refreshData;
     console.log($route);
 

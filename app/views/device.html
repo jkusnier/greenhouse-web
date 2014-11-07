@@ -1,14 +1,18 @@
 <div class="row">
-    <h1 ng-click="vm.hideDetails = !vm.hideDetails">Device</h1>
+    <div class="col-md-12">
+        <h1 ng-click="vm.hideDetails = !vm.hideDetails">Device</h1>
+    </div>
 </div>
 <div class="row" ng-hide="vm.hideDetails">
-    <ul class="list-group">
-        <li class="list-group-item" ng-repeat="(key, value) in vm.environment">
-            {{key}} - {{value}}
-        </li>
-    </ul>
-    <div class="pull-right">
-        <button class="btn btn-default" ng-click="vm.refreshData(vm.environment.coreid)">Refresh</button>
+    <div class="col-md-12">
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="(key, value) in vm.environment">
+                {{key}} - {{value}}
+            </li>
+        </ul>
+        <div class="pull-right">
+            <button class="btn btn-default" ng-click="vm.refreshData(vm.environment.coreid)">Refresh</button>
+        </div>
     </div>
 </div>
 
@@ -26,5 +30,7 @@
 </div>
 
 <div class="row">
-    <highchart id="chart1" config="chartConfig" class="col-md-12"></highchart>
+    <div class="col-md-12">
+        <highchart id="chart1" config="chartConfig" class="col-md-12"></highchart>
+    </div>
 </div>

@@ -28,7 +28,8 @@ function DeviceCtrl($rootScope, $scope, $route, $interval, GreenhouseService, $$
             data: [],
             lineWidth: 0.1,
             tooltip: {
-                valueDecimals: 2
+                valueDecimals: 2,
+                xDateFormat: "%m/%e/%y %l:%M %p"
             },
             fillColor: {
                 linearGradient: {

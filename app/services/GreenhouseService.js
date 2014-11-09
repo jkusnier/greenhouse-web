@@ -26,6 +26,13 @@ function GreenhouseService($http) {
             url: 'http://api.weecode.com/greenhouse/v1/devices/'+id+'/data/fahrenheit'
         });
     }
+
+    this.getOutsideData = function (id) {
+        return $http({
+            method: 'GET',
+            url: 'http://api.weecode.com/greenhouse/v1//weather/STATION-HERE/fahrenheit'
+        });
+    };
 }
 
 angular

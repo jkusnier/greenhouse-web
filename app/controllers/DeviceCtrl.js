@@ -1,8 +1,9 @@
 'use strict';
 
-function DeviceCtrl($rootScope, $scope, $route, $interval, GreenhouseService, $$getEnvironment) {
+function DeviceCtrl($rootScope, $scope, $route, $interval, GreenhouseService, $$getEnvironment, $$getOutsideDataNow) {
     var vm = this;
     vm.environment = $$getEnvironment.data;
+    vm.outsideData = $$getOutsideDataNow.data;
     vm.temperatureData = [];
     vm.hideDetails = true;
     $rootScope.breadCrumbs = ["devices", "device"];
@@ -127,6 +128,9 @@ function DeviceCtrl($rootScope, $scope, $route, $interval, GreenhouseService, $$
 DeviceCtrl.resolve = {
     '$$getEnvironment': function (GreenhouseService, $route) {
         return GreenhouseService.getEnvironment($route.current.params.id);
+    },
+    '$$getOutsideDataNow': function(GreenhouseService, $route) {
+        return GreenhouseService.getOutsideDataNow($route.current.params.id);
     }
 };
 

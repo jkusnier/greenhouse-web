@@ -21,6 +21,7 @@
         <ul class="list-inline" role="tablist">
             <li role="presentation">Temperature <span class="label" ng-class="{'label-success': !vm.temperatureWarning, 'label-danger': vm.temperatureWarning}" ng-bind="vm.environment.fahrenheit"></span></li>
             <li role="presentation">Humidity <span class="label label-default" ng-bind="vm.environment.humidity"></span></li>
+            <li role="presentation">Outside <span class="label label-default" ng-bind="vm.outsideData.temp_f"></span></li>
         </ul>
     </div>
 

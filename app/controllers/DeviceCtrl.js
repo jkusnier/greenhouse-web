@@ -7,7 +7,7 @@ function DeviceCtrl($rootScope, $scope, $route, $interval, GreenhouseService, $$
     vm.outsideData = $$getOutsideDataNow.data;
     vm.temperatureData = [];
     vm.hideDetails = true;
-    $rootScope.breadCrumbs = ["devices", "device"];
+    $rootScope.breadCrumbs = [{'name': 'devices', 'url': '/device'}, {'name': vm.device.name, 'url': '/device/' + vm.device.coreid}];
 
     vm.temperatureWarning = (vm.environment.fahrenheit <= 34 || vm.environment.fahrenheit >= 85);
 

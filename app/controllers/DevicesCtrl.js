@@ -3,7 +3,7 @@
 function DevicesCtrl($rootScope, $$getDevices) {
     var vm = this;
     vm.devices = $$getDevices.data;
-    $rootScope.breadCrumbs = ["devices"];
+    $rootScope.breadCrumbs = [{'name': 'devices', 'url': '/device'}];
 }
 
 DevicesCtrl.resolve = {

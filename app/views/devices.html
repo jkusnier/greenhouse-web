@@ -1,7 +1,5 @@
-<p>Devices</p>
-
-<ol class="list-group">
-    <li class="list-group-item" ng-repeat="device in vm.devices">
-        <a href="#/device/{{ device.coreid }}">{{device.name}} - {{device.description}}</a>
+<ul class="nav nav-pills nav-stacked">
+    <li class="" ng-repeat="device in vm.devices">
+        <a href="#/device/{{ device.coreid }}">{{device.description}} - {{device.name}}</a>
     </li>
-</ol>
+</ul>

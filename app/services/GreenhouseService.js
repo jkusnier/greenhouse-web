@@ -6,6 +6,13 @@ function GreenhouseService($http) {
         });
     };
 
+    this.getDevice = function (id) {
+        return $http({
+            method: 'GET',
+            url: 'http://api.weecode.com/greenhouse/v1/devices/'+id
+        });
+    };
+
     this.getEnvironment = function (id) {
         return $http({
             method: 'GET',

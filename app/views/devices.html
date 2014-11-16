@@ -1,5 +1,9 @@
-<ul class="nav nav-pills nav-stacked">
-    <li class="" ng-repeat="device in vm.devices">
-        <a href="#/device/{{ device.coreid }}">{{device.description}} - {{device.name}}</a>
-    </li>
-</ul>
+<div class="row">
+    <div class="col-md-4">
+        <ul class="nav nav-pills nav-stacked">
+            <li class="" ng-repeat="device in vm.devices">
+                <a href="#/device/{{ device.coreid }}">{{device.description}} - {{device.name}}</a>
+            </li>
+        </ul>
+    </div>
+</div>

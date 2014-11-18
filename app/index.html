@@ -22,7 +22,7 @@
 </head>
 <body>
 <ol class="breadcrumb">
-    <li ng-repeat="item in breadCrumbs" ng-class="{'active': $last}" ng-switch on="$last">
+    <li ng-repeat="item in breadCrumbs" ng-class="{'active': $last}" ng-switch on="$last" ng-if="breadCrumbs.length > 1">
         <span ng-switch-when="true">{{item.name}}</span>
         <a href="#{{item.url}}" ng-switch-default>{{item.name}}</a>
     </li>

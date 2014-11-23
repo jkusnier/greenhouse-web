@@ -20,4 +20,11 @@ angular
                 resolve: DeviceCtrl.resolve
             })
             .otherwise({redirectTo: '/devices'});
-    }]);
+    }])
+    .run(function($rootScope, GreenhouseService){
+        GreenhouseService.getDevices().then(function (resp) {
+            $rootScope.allDevices = resp.data;
+        }, function (err) {
+            console.error(err);
+        });
+    });

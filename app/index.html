@@ -34,11 +34,14 @@
                         </li>
                         <li class="divider"></li>
                         <li ng-repeat="device in allDevices">
-                            <a href="#/device/{{ device.coreid }}">{{device.description}} - {{device.name}}</a>
+                            <a href="#/device/{{ device.coreid }}"><span class="glyphicon" ng-class="{'glyphicon-ok': device.description == deviceDescription, 'glyphicon-chevron-right': device.description != deviceDescription}"></span> {{device.description}} - {{device.name}}</a>
                         </li>
                     </ul>
                 </li>
-                <li><p class="navbar-text">Placeholder Title</p></li>
+                <li>
+                    <p class="navbar-text" ng-if="deviceDescription">{{deviceDescription}}</p>
+                    <p class="navbar-text" ng-if="!deviceDescription">Temperature Monitors</p>
+                </li>
             </ul>
         </div>
     </div><!-- /.container-fluid -->

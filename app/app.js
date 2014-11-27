@@ -21,10 +21,12 @@ angular
             })
             .otherwise({redirectTo: '/devices'});
     }])
-    .run(function($rootScope, GreenhouseService){
-        GreenhouseService.getDevices().then(function (resp) {
-            $rootScope.allDevices = resp.data;
-        }, function (err) {
-            console.error(err);
-        });
+    .run(function($rootScope, GreenhouseService) {
+        if (!$rootScope.allDevices) {
+            GreenhouseService.getDevices().then(function (resp) {
+                $rootScope.allDevices = resp.data;
+            }, function (err) {
+                console.error(err);
+            });
+        }
     });

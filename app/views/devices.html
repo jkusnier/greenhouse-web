@@ -6,7 +6,13 @@
     <div class="col-md-2">
         {{device.name}}
     </div>
-    <div class="col-md-8">
+    <div class="col-md-2">
+        <span class="label label-default" ng-bind="device.environment.fahrenheit"></span>
+    </div>
+    <div class="col-md-2">
+        <span class="label label-default" ng-bind="device.environment.humidity"></span>
+    </div>
+    <div class="col-md-4">
     </div>
     </a>
 </div>

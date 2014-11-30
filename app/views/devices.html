@@ -1,15 +1,15 @@
-<div class="row" ng-repeat="device in allDevices">
+<div class="row device" ng-repeat="device in allDevices">
     <a href="#/device/{{ device.coreid }}">
-    <div class="col-md-2">
+    <div class="col-md-2 description">
         {{device.description}}
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 name">
         {{device.name}}
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 environment-fahrenheit">
         <span class="label label-default" ng-bind="device.environment.fahrenheit"></span>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 environment-humidity">
         <span class="label label-default" ng-bind="device.environment.humidity"></span>
     </div>
     <div class="col-md-4">

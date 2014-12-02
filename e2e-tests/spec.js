@@ -14,6 +14,12 @@ describe('my app', function () {
         expect(browser.getLocationAbsUrl()).toMatch('/devices');
     });
 
+    it('should have a version', function () {
+        browser.get('index.html');
+
+        expect(element.all(by.css('span.app-version')).count()).toBe(1);
+    });
+
     describe('devices', function () {
         beforeEach(function () {
             browser.get('index.html#/devices');

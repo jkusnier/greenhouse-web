@@ -28,4 +28,21 @@ describe('my app', function () {
                 toMatch(/Temperature Monitors/);
         });
     });
+
+    describe('device', function () {
+        browser.get('index.html#/devices');
+
+        var device = element.all(by.css('.row.device')).first();
+        var a = device.element(by.css('a'));
+        var description = device.element(by.css('.description')).getText().name;
+        //device.element(by.css('.description')).getText().then(function (name) {
+        //    description = name;
+        //});
+
+        it('should have a title that matches the link', function () {
+            a.click().then(function() {
+                expect(element(by.css('p.navbar-text')).getText()).toMatch(description);
+            });
+        });
+    });
 });

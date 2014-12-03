@@ -21,9 +21,7 @@ describe('my app', function () {
     });
 
     describe('devices', function () {
-        beforeEach(function () {
-            browser.get('index.html#/devices');
-        });
+        browser.get('index.html#/devices');
 
         it('should render devices when user navigates to /devices', function () {
             expect(element.all(by.css('p.navbar-text')).first().getText()).

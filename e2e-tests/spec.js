@@ -34,14 +34,17 @@ describe('my app', function () {
 
         var device = element.all(by.css('.row.device')).first();
         var a = device.element(by.css('a'));
-        var description = device.element(by.css('.description')).getText().name;
+        var description;
+        device.element(by.css('.description')).getText().then(function(name) {
+            description = name;
+        });
         //device.element(by.css('.description')).getText().then(function (name) {
         //    description = name;
         //});
 
         it('should have a title that matches the link', function () {
             a.click().then(function() {
-                expect(element(by.css('p.navbar-text')).getText()).toMatch(description);
+                expect(element(by.css('p.navbar-text')).getText()).toEqual(description);
             });
         });
     });

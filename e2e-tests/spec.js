@@ -64,5 +64,11 @@ describe('my app', function () {
 
             expect(element(by.css('.humidity-value')).getText()).toBeGreaterThan(-100);
         });
+
+        it('should show the outside temperature', function () {
+            browser.get(loc);
+
+            expect(element(by.css('.outside-temperature-value')).getText()).toBeGreaterThan(-100);
+        });
     });
 });

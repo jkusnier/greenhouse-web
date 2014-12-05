@@ -58,5 +58,11 @@ describe('my app', function () {
 
             expect(element(by.css('.temperature-value')).getText()).toBeGreaterThan(-100);
         });
+
+        it('shoud show the humidity', function () {
+            browser.get(loc);
+
+            expect(element(by.css('.humidity-value')).getText()).toBeGreaterThan(-100);
+        });
     });
 });

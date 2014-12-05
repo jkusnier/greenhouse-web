@@ -35,8 +35,13 @@ describe('my app', function () {
         var device = element.all(by.css('.row.device')).first();
         var a = device.element(by.css('a'));
         var description;
+        var loc;
+        // FIXME we need q to manage these promises
         device.element(by.css('.description')).getText().then(function(name) {
             description = name;
+        });
+        a.getAttribute('href').then(function (val) {
+            loc = val;
         });
         //device.element(by.css('.description')).getText().then(function (name) {
         //    description = name;

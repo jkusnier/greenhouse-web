@@ -52,5 +52,11 @@ describe('my app', function () {
                 expect(element(by.css('p.navbar-text')).getText()).toEqual(description);
             });
         });
+
+        it('should show the temperature', function () {
+            browser.get(loc);
+
+            expect(element(by.css('.temperature-value')).getText()).toBeGreaterThan(-100);
+        });
     });
 });

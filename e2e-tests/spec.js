@@ -70,5 +70,18 @@ describe('my app', function () {
 
             expect(element(by.css('.outside-temperature-value')).getText()).toBeGreaterThan(-100);
         });
+
+        it('should all details of the environment', function () {
+            browser.get(loc);
+
+            expect(element.all(by.css('ul.environment li._id-key')).count()).toBe(1);
+            expect(element.all(by.css('ul.environment li.celsius-key')).count()).toBe(1);
+            expect(element.all(by.css('ul.environment li.coreid-key')).count()).toBe(1);
+            expect(element.all(by.css('ul.environment li.created_on-key')).count()).toBe(1);
+            expect(element.all(by.css('ul.environment li.fahrenheit-key')).count()).toBe(1);
+            expect(element.all(by.css('ul.environment li.humidity-key')).count()).toBe(1);
+            expect(element.all(by.css('ul.environment li.name-key')).count()).toBe(1);
+            expect(element.all(by.css('ul.environment li.published_at-key')).count()).toBe(1);
+        });
     });
 });

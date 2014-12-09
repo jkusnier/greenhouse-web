@@ -82,6 +82,8 @@ describe('my app', function () {
             expect(element.all(by.css('ul.environment li.humidity-key')).count()).toBe(1);
             expect(element.all(by.css('ul.environment li.name-key')).count()).toBe(1);
             expect(element.all(by.css('ul.environment li.published_at-key')).count()).toBe(1);
+
+            expect(element.all(by.css('span.app-version')).count()).toBe(1);
         });
     });
 });

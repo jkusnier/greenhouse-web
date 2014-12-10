@@ -8,7 +8,7 @@
     </div>
 
     <div class="col-md-4 text-right" ng-click="vm.hideDetails = !vm.hideDetails">
-        <small class="selectable" ng-bind="vm.environment.published_at | date: 'short'"></small> <i class="selectable glyphicon ng-scope" ng-class="{'glyphicon-chevron-down': !vm.hideDetails, 'glyphicon-chevron-right': vm.hideDetails}"></i>
+        <small class="selectable last-published" ng-bind="vm.environment.published_at | date: 'short'"></small> <i class="selectable glyphicon ng-scope" ng-class="{'glyphicon-chevron-down': !vm.hideDetails, 'glyphicon-chevron-right': vm.hideDetails}"></i>
     </div>
 </div>
 

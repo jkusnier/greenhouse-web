@@ -71,6 +71,12 @@ describe('my app', function () {
             expect(element(by.css('.outside-temperature-value')).getText()).toBeGreaterThan(-100);
         });
 
+        it('should show the last published time', function () {
+            browser.get(loc);
+
+            expect(element.all(by.css('.last-published')).count()).toBe(1);
+        });
+
         it('should all details of the environment', function () {
             browser.get(loc);
 
